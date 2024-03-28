@@ -252,7 +252,7 @@ class ParentBlot extends ShadowBlot implements Parent {
   public optimize(context?: { [key: string]: any }): void {
     super.optimize(context);
     this.enforceAllowedChildren();
-    if (this.uiNode != null && this.uiNode !== this.domNode.firstChild) {
+    if (this.uiNode != null && this.uiNode !== this.domNode.firstChild && this.uiNode !== this.domNode.lastChild) {
       this.domNode.insertBefore(this.uiNode, this.domNode.firstChild);
     }
     if (this.children.length === 0) {
