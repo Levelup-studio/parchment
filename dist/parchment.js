@@ -482,7 +482,7 @@ const _ParentBlot = class _ParentBlot extends ShadowBlot {
     });
   }
   optimize(context) {
-    if (super.optimize(context), this.enforceAllowedChildren(), this.uiNode != null && this.uiNode !== this.domNode.firstChild && this.uiNode !== this.domNode.lastChild && this.domNode.insertBefore(this.uiNode, this.domNode.firstChild), this.children.length === 0)
+    if (super.optimize(context), this.enforceAllowedChildren(), this.uiNode != null && this.uiNode !== this.domNode.lastChild && (this.uiNode.remove(), this.domNode.append(this.uiNode)), this.children.length === 0)
       if (this.statics.defaultChild != null) {
         const child = this.scroll.create(this.statics.defaultChild.blotName);
         this.appendChild(child);
