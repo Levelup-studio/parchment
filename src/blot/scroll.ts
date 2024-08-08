@@ -7,6 +7,7 @@ import BlockBlot from './block.js';
 
 const OBSERVER_CONFIG = {
   attributes: true,
+  attributeOldValue : true,
   characterData: true,
   characterDataOldValue: true,
   childList: true,

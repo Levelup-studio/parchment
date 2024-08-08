@@ -700,6 +700,7 @@ class EmbedBlot extends LeafBlot$1 {
 }
 const EmbedBlot$1 = EmbedBlot, OBSERVER_CONFIG = {
   attributes: !0,
+  attributeOldValue: !0,
   characterData: !0,
   characterDataOldValue: !0,
   childList: !0,
