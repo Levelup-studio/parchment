@@ -17,7 +17,8 @@ class Attributor {
   canAdd(_node, value) {
     return this.whitelist == null ? !0 : typeof value == "string" ? this.whitelist.indexOf(value.replace(/["']/g, "")) > -1 : this.whitelist.indexOf(value) > -1;
   }
-  remove(node) {
+  // @ts-expect-error
+  remove(node, value) {
     node.removeAttribute(this.keyName);
   }
   value(node) {
@@ -91,9 +92,10 @@ class ClassAttributor extends Attributor {
     return (node.getAttribute("class") || "").split(/\s+/).map((name) => name.split("-").slice(0, -1).join("-"));
   }
   add(node, value) {
-    return this.canAdd(node, value) ? (this.remove(node), node.classList.add(`${this.keyName}-${value}`), !0) : !1;
+    return this.canAdd(node, value) ? (this.remove(node, value), node.classList.add(`${this.keyName}-${value}`), !0) : !1;
   }
-  remove(node) {
+  // @ts-expect-error
+  remove(node, value) {
     match(node, this.keyName).forEach((name) => {
       node.classList.remove(name);
     }), node.classList.length === 0 && node.removeAttribute("class");
@@ -115,7 +117,8 @@ class StyleAttributor extends Attributor {
   add(node, value) {
     return this.canAdd(node, value) ? (node.style[camelize(this.keyName)] = value, !0) : !1;
   }
-  remove(node) {
+  // @ts-expect-error Fix me later
+  remove(node, value) {
     node.style[camelize(this.keyName)] = "", node.getAttribute("style") || node.removeAttribute("style");
   }
   value(node) {
@@ -129,7 +132,7 @@ class AttributorStore {
     this.attributes = {}, this.domNode = domNode, this.build();
   }
   attribute(attribute, value) {
-    value ? attribute.add(this.domNode, value) && (attribute.value(this.domNode) != null ? this.attributes[attribute.attrName] = attribute : delete this.attributes[attribute.attrName]) : (attribute.remove(this.domNode), delete this.attributes[attribute.attrName]);
+    value ? attribute.add(this.domNode, value) && (attribute.value(this.domNode) != null ? this.attributes[attribute.attrName] = attribute : delete this.attributes[attribute.attrName]) : (attribute.remove(this.domNode, value), delete this.attributes[attribute.attrName]);
   }
   build() {
     this.attributes = {};

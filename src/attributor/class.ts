@@ -18,12 +18,12 @@ class ClassAttributor extends Attributor {
     if (!this.canAdd(node, value)) {
       return false;
     }
-    this.remove(node);
+    this.remove(node, value);
     node.classList.add(`${this.keyName}-${value}`);
     return true;
   }
-
-  public remove(node: HTMLElement): void {
+  // @ts-expect-error
+  public remove(node: HTMLElement, value?: any): void {
     const matches = match(node, this.keyName);
     matches.forEach((name) => {
       node.classList.remove(name);

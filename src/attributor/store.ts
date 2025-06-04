@@ -25,7 +25,7 @@ class AttributorStore {
         }
       }
     } else {
-      attribute.remove(this.domNode);
+      attribute.remove(this.domNode, value);
       delete this.attributes[attribute.attrName];
     }
   }

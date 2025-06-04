@@ -26,7 +26,8 @@ class StyleAttributor extends Attributor {
     return true;
   }
 
-  public remove(node: HTMLElement): void {
+  // @ts-expect-error Fix me later
+  public remove(node: HTMLElement, value?: any): void {
     // @ts-expect-error Fix me later
     node.style[camelize(this.keyName)] = '';
     if (!node.getAttribute('style')) {

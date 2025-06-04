@@ -47,8 +47,8 @@ export default class Attributor {
       return this.whitelist.indexOf(value) > -1;
     }
   }
-
-  public remove(node: HTMLElement): void {
+  // @ts-expect-error
+  public remove(node: HTMLElement, value?: any): void {
     node.removeAttribute(this.keyName);
   }
 
